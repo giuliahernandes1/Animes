@@ -1,0 +1,505 @@
+/* ==========================================================
+   Catálogo de Animes - estilo.css
+   CSS3 puro (sem frameworks). Tema escuro baseado no Figma.
+   Para trocar o visual do sistema inteiro, altere o :root.
+   ========================================================== */
+
+:root {
+    /* Cores */
+    --cor-fundo: #252a4a;
+    --cor-fundo-escuro: #1b1d33;
+    --cor-card: #1e1f35;
+    --cor-card-claro: #2a2d4d;
+    --cor-texto: #ffffff;
+    --cor-texto-suave: #a3a7c9;
+    --cor-rosa: #d81bd0;
+    --cor-laranja: #ff6a1f;
+    --cor-borda: #3a3e66;
+    --cor-erro: #ff5b6e;
+
+    /* Tipografia */
+    --fonte: "Montserrat", "Poppins", Arial, Helvetica, sans-serif;
+
+    /* Medidas */
+    --raio: 14px;
+    --raio-pequeno: 8px;
+    --espaco: 1.25rem;
+    --largura-max: 1100px;
+}
+
+/* ---------- Base ---------- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: var(--fonte);
+    line-height: 1.5;
+    color: var(--cor-texto);
+    background-color: var(--cor-fundo);
+    /* Se a imagem não existir, o gradiente continua funcionando */
+    background-image:
+        linear-gradient(rgba(37, 42, 74, 0.88), rgba(27, 29, 51, 0.94)),
+        url("../imagens/fundo-neotokyo.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+h1, h2, h3 {
+    margin: 0 0 0.5rem;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+}
+
+h2 {
+    font-size: 1.4rem;
+}
+
+h3 {
+    font-size: 1.1rem;
+}
+
+p {
+    margin: 0 0 0.75rem;
+}
+
+a {
+    color: var(--cor-laranja);
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+    text-decoration: underline;
+}
+
+/* ---------- Cabeçalho e navegação ---------- */
+header {
+    max-width: var(--largura-max);
+    margin: 0 auto;
+    padding: 2rem var(--espaco) 1rem;
+    text-align: center;
+}
+
+header > p {
+    color: var(--cor-texto-suave);
+}
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin: 1.2rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav a {
+    display: block;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--cor-borda);
+    border-radius: 999px;
+    background-color: var(--cor-card);
+    color: var(--cor-texto);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+nav a:hover,
+nav a:focus {
+    border-color: var(--cor-rosa);
+    background-color: var(--cor-card-claro);
+    text-decoration: none;
+}
+
+/* Página atual no menu */
+nav a[aria-current="page"] {
+    border-color: transparent;
+    background-image: linear-gradient(90deg, var(--cor-rosa), var(--cor-laranja));
+}
+
+/* ---------- Conteúdo principal ---------- */
+main {
+    max-width: var(--largura-max);
+    margin: 0 auto;
+    padding: 1rem var(--espaco) 2rem;
+}
+
+main > section {
+    margin-bottom: var(--espaco);
+    padding: var(--espaco);
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio);
+    background-color: var(--cor-card);
+}
+
+main > section > h2 {
+    padding-bottom: 0.6rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--cor-rosa);
+}
+
+/* Cartões de navegação do menu principal */
+section[aria-label="Opções do sistema"] {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--espaco);
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+section[aria-label="Opções do sistema"] article {
+    padding: 1.5rem;
+    border: 2px solid var(--cor-rosa);
+    border-bottom-color: var(--cor-laranja);
+    border-radius: var(--raio);
+    background-color: var(--cor-card);
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+section[aria-label="Opções do sistema"] article:hover {
+    transform: translateY(-4px);
+}
+
+section[aria-label="Opções do sistema"] article p {
+    color: var(--cor-texto-suave);
+    font-size: 0.9rem;
+}
+
+/* ---------- Formulários ---------- */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+form p {
+    margin: 0;
+}
+
+form br {
+    display: none;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 0.65rem 0.8rem;
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-pequeno);
+    background-color: var(--cor-fundo-escuro);
+    color: var(--cor-texto);
+    font-family: var(--fonte);
+    font-size: 0.95rem;
+}
+
+textarea {
+    resize: vertical;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--cor-texto-suave);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--cor-rosa);
+    box-shadow: 0 0 0 3px rgba(216, 27, 208, 0.25);
+}
+
+input[type="file"] {
+    padding: 0.5rem;
+    background-color: var(--cor-fundo-escuro);
+    cursor: pointer;
+}
+
+/* Formulário em grade (formulários de cadastro e filtros) */
+form.form-grade {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    align-items: end;
+}
+
+form.form-grade .campo-largo {
+    grid-column: 1 / -1;
+}
+
+.acoes-form {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+/* ---------- Botões ---------- */
+button {
+    padding: 0.7rem 1.4rem;
+    border: none;
+    border-radius: var(--raio-pequeno);
+    background-image: linear-gradient(90deg, var(--cor-rosa), var(--cor-laranja));
+    color: var(--cor-texto);
+    font-family: var(--fonte);
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+}
+
+button:hover,
+button:focus {
+    opacity: 0.9;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+/* Botão secundário (Limpar) */
+button[type="reset"] {
+    border: 1px solid var(--cor-borda);
+    background-image: none;
+    background-color: var(--cor-card-claro);
+}
+
+/* ---------- Tabelas ---------- */
+.tabela-responsiva {
+    overflow-x: auto;
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-pequeno);
+}
+
+table {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+th,
+td {
+    padding: 0.8rem 0.9rem;
+    text-align: left;
+    vertical-align: middle;
+}
+
+thead th {
+    background-color: var(--cor-card-claro);
+    border-bottom: 2px solid var(--cor-rosa);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+tbody tr {
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+tbody tr:hover {
+    background-color: rgba(216, 27, 208, 0.1);
+}
+
+/* Caixa de imagem de exemplo (capa / logo) */
+.imagem-exemplo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 84px;
+    border: 1px dashed var(--cor-rosa);
+    border-radius: var(--raio-pequeno);
+    background-color: var(--cor-fundo-escuro);
+    color: var(--cor-texto-suave);
+    font-size: 0.7rem;
+    text-align: center;
+}
+
+/* Etiqueta de gênero */
+.etiqueta {
+    display: inline-block;
+    padding: 0.15rem 0.6rem;
+    border: 1px solid var(--cor-laranja);
+    border-radius: 999px;
+    color: var(--cor-laranja);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.sinopse-curta {
+    max-width: 280px;
+    color: var(--cor-texto-suave);
+}
+
+.link-excluir {
+    color: var(--cor-erro);
+}
+
+.info-resultado {
+    color: var(--cor-texto-suave);
+    font-size: 0.9rem;
+}
+
+/* ---------- Rodapé ---------- */
+footer {
+    padding: 1.5rem var(--espaco);
+    color: var(--cor-texto-suave);
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+/* ---------- Login ---------- */
+/* O login tem só header + main, então centralizamos o cartão */
+main > section[aria-labelledby="titulo-login"] {
+    max-width: 420px;
+    margin: 1rem auto;
+}
+
+/* ---------- Responsividade ---------- */
+@media (max-width: 768px) {
+    header {
+        padding-top: 1.5rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav a {
+        text-align: center;
+    }
+
+    main > section {
+        padding: 1rem;
+    }
+
+    .acoes-form button {
+        flex: 1 1 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    form.form-grade {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================
+   Sprint 2 - telas em PHP (mensagens, capas e botões de ação)
+   ========================================================== */
+
+/* Mensagens de sucesso e de erro */
+.mensagem {
+    margin: 0 0 var(--espaco);
+    padding: 0.9rem 1rem;
+    border-left: 4px solid var(--cor-borda);
+    border-radius: var(--raio-pequeno);
+    background-color: var(--cor-card);
+    font-weight: 600;
+}
+
+.mensagem-sucesso {
+    border-left-color: #3ddc97;
+    background-color: rgba(61, 220, 151, 0.12);
+}
+
+.mensagem-erro {
+    border-left-color: var(--cor-erro);
+    background-color: rgba(255, 91, 110, 0.12);
+}
+
+.mensagem p {
+    margin: 0;
+}
+
+.mensagem ul {
+    margin: 0.4rem 0 0;
+    padding-left: 1.2rem;
+    font-weight: 400;
+}
+
+/* Capa em miniatura (tabelas e edição) */
+img.capa-mini {
+    display: block;
+    width: 60px;
+    height: 84px;
+    object-fit: cover;
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-pequeno);
+}
+
+.capa-atual {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: var(--cor-texto-suave);
+    font-size: 0.9rem;
+}
+
+/* Botão de excluir que parece link (fica dentro de um formulário) */
+form.form-inline {
+    display: inline;
+}
+
+.btn-link {
+    padding: 0;
+    border: none;
+    background: none;
+    background-image: none;
+    color: var(--cor-erro);
+    font-size: inherit;
+    font-weight: 400;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-link:hover,
+.btn-link:focus {
+    text-decoration: underline;
+}
+
+/* Link com aparência de botão secundário (Cancelar / Limpar filtros) */
+a.botao-cancelar {
+    display: inline-block;
+    padding: 0.7rem 1.4rem;
+    border: 1px solid var(--cor-borda);
+    border-radius: var(--raio-pequeno);
+    background-color: var(--cor-card-claro);
+    color: var(--cor-texto);
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+a.botao-cancelar:hover,
+a.botao-cancelar:focus {
+    text-decoration: none;
+    border-color: var(--cor-rosa);
+}
